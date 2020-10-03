@@ -1,0 +1,242 @@
+function onOpen() {
+  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
+      .createMenu('Requirement Check Counter')
+      .addItem('Requirment Check', 'DataInput')
+      .addToUi();
+}
+function DataInput() {
+  var setterlink = '17s5mB3X9K0ZHa0TbJwuj0qcCbqg1y5zapHQVa5K4Tew'
+  var getterlink = '1wbd6iiQIDiv2kDyY8btRy4Og-leBniDTB_0vearsuYA'
+  var ss = SpreadsheetApp.openById(setterlink)
+  var datainput = SpreadsheetApp.getActiveSheet()
+  var holder = datainput
+  var studentno = datainput.getRange(2, 2).getValues()
+  var mobileno = datainput.getRange(7, 2).getValues()
+  var choice1 = String(datainput.getRange(3, 2).getValues()).toUpperCase();
+  var choice1range = datainput.getRange(3, 2);
+  var choice2= String(datainput.getRange(4, 2).getValues()).toUpperCase();
+  var choice2range = datainput.getRange(4, 2)
+  var choice3 = String(datainput.getRange(5, 2).getValues()).toUpperCase();
+  var choice3range = datainput.getRange(5, 2)
+  var choice4 = String(datainput.getRange(6, 2).getValues()).toUpperCase();
+  var choice4range = datainput.getRange(6, 2);
+  var status = datainput.getRange(8,2).getValues()
+  var choice1name = datainput.getRange(11,2).getValues()
+  var choice1category = datainput.getRange(12,2).getValues()
+  var choice1fee = datainput.getRange(13,2).getValues()
+  var choice2name = datainput.getRange(14,2).getValues()
+  var choice2category = datainput.getRange(15,2).getValues()
+  var choice2fee = datainput.getRange(16, 2).getValues()
+  var choice3name = datainput.getRange(17,2).getValues()
+  var choice3category = datainput.getRange(18,2).getValues()
+  var choice3fee = datainput.getRange(19,2).getValues()
+  var choice4name = datainput.getRange(20,2).getValues()
+  var choice4category = datainput.getRange(21,2).getValues()
+  var choice4fee = datainput.getRange(22,2).getValues()
+  var totalfee = datainput.getRange(23, 2).getValues()
+  var totalclubs = datainput.getRange(16,5).getValues()
+  var totalclubs = parseInt(totalclubs)
+  var rownumber = datainput.getRange(2,9).getValues()
+  var row = parseInt(rownumber)
+  var ui=SpreadsheetApp.getUi()
+  var pass = false
+  if (status=="OK"){
+    if(totalclubs ==4 ){
+  var database = SpreadsheetApp.openById(getterlink)
+  SpreadsheetApp.setActiveSpreadsheet(database);
+  var database = SpreadsheetApp.setActiveSheet(database.getSheets()[0])
+  database.getRange(row,8,1,19).setValue("")
+  database.getRange(row,8).setValue(mobileno)
+  database.getRange(row, 9).setValue(choice1)
+  database.getRange(row, 10).setValue(choice2)
+  database.getRange(row, 11).setValue(choice3)
+  database.getRange(row, 12).setValue(choice4)
+  database.getRange(row, 13).setValue(choice1name)
+  database.getRange(row, 14).setValue(choice1category)
+  database.getRange(row, 15).setValue(choice1fee)
+  database.getRange(row, 16).setValue(choice2name)
+  database.getRange(row, 17).setValue(choice2category)
+  database.getRange(row, 18).setValue(choice2fee)
+  database.getRange(row, 19).setValue(choice3name)
+  database.getRange(row, 20).setValue(choice3category)
+  database.getRange(row, 21).setValue(choice3fee)  
+  database.getRange(row, 22).setValue(choice4name)
+  database.getRange(row, 23).setValue(choice4category)
+  database.getRange(row, 24).setValue(choice4fee)
+  database.getRange(row, 25).setValue(totalclubs)
+  database.getRange(row, 26).setValue(totalfee)
+  ui.alert('Data has been entered')
+  var ss = SpreadsheetApp.openById(setterlink)
+  SpreadsheetApp.setActiveSpreadsheet(ss)
+  var wipe = SpreadsheetApp.setActiveSheet(holder)
+  wipe.getRange(2,2).setValue("")
+  wipe.getRange(3,2).setValue("")
+  wipe.getRange(4,2).setValue("")
+  wipe.getRange(5,2).setValue("")
+  wipe.getRange(6,2).setValue("")
+  wipe.getRange(7,2).setValue("")
+  var cell = wipe.getRange('B2');
+   wipe.setCurrentCell(cell);
+    var pass = true
+    } if (totalclubs ==3 && choice4range.isBlank()==true){
+    var database = SpreadsheetApp.openById(getterlink)
+  SpreadsheetApp.setActiveSpreadsheet(database);
+  var database = SpreadsheetApp.setActiveSheet(database.getSheets()[0])
+    database.getRange(row,8,1,19).setValue("")
+    database.getRange(row,8).setValue(mobileno)
+  database.getRange(row, 9).setValue(choice1)
+  database.getRange(row, 10).setValue(choice2)
+  database.getRange(row, 11).setValue(choice3)
+  database.getRange(row, 12).setValue(choice4)
+  database.getRange(row, 13).setValue(choice1name)
+  database.getRange(row, 14).setValue(choice1category)
+  database.getRange(row, 15).setValue(choice1fee)
+  database.getRange(row, 16).setValue(choice2name)
+  database.getRange(row, 17).setValue(choice2category)
+  database.getRange(row, 18).setValue(choice2fee)
+  database.getRange(row, 19).setValue(choice3name)
+  database.getRange(row, 20).setValue(choice3category)
+  database.getRange(row, 21).setValue(choice3fee)  
+  database.getRange(row, 22).setValue(choice4name)
+  database.getRange(row, 23).setValue(choice4category)
+  database.getRange(row, 24).setValue(choice4fee)
+  database.getRange(row, 25).setValue(totalclubs)
+  database.getRange(row, 26).setValue(totalfee)
+  
+  ui.alert('Data has been entered')
+  var ss = SpreadsheetApp.openById(setterlink)
+  SpreadsheetApp.setActiveSpreadsheet(ss)
+  var wipe = SpreadsheetApp.setActiveSheet(holder)
+  wipe.getRange(2,2).setValue("")
+  wipe.getRange(3,2).setValue("")
+  wipe.getRange(4,2).setValue("")
+  wipe.getRange(5,2).setValue("")
+  wipe.getRange(6,2).setValue("")
+  wipe.getRange(7,2).setValue("")
+  var cell = wipe.getRange('B2');
+   wipe.setCurrentCell(cell);
+      var pass = true
+    } if (totalclubs == 2 && choice3range.isBlank() == true && choice4range.isBlank() == true){
+    var database = SpreadsheetApp.openById(getterlink)
+  SpreadsheetApp.setActiveSpreadsheet(database);
+  var database = SpreadsheetApp.setActiveSheet(database.getSheets()[0])
+  database.getRange(row,8,1,19).setValue("")
+  database.getRange(row,8).setValue(mobileno)
+  database.getRange(row, 9).setValue(choice1)
+  database.getRange(row, 10).setValue(choice2)
+  database.getRange(row, 11).setValue(choice3)
+  database.getRange(row, 12).setValue(choice4)
+  database.getRange(row, 13).setValue(choice1name)
+  database.getRange(row, 14).setValue(choice1category)
+  database.getRange(row, 15).setValue(choice1fee)
+  database.getRange(row, 16).setValue(choice2name)
+  database.getRange(row, 17).setValue(choice2category)
+  database.getRange(row, 18).setValue(choice2fee)
+  database.getRange(row, 19).setValue(choice3name)
+  database.getRange(row, 20).setValue(choice3category)
+  database.getRange(row, 21).setValue(choice3fee)  
+  database.getRange(row, 22).setValue(choice4name)
+  database.getRange(row, 23).setValue(choice4category)
+  database.getRange(row, 24).setValue(choice4fee)
+  database.getRange(row, 25).setValue(totalclubs)
+  database.getRange(row, 26).setValue(totalfee)
+  ui.alert('Data has been entered')
+  var ss = SpreadsheetApp.openById(setterlink)
+  SpreadsheetApp.setActiveSpreadsheet(ss)
+  var wipe = SpreadsheetApp.setActiveSheet(holder)
+  wipe.getRange(2,2).setValue("")
+  wipe.getRange(3,2).setValue("")
+  wipe.getRange(4,2).setValue("")
+  wipe.getRange(5,2).setValue("")
+  wipe.getRange(6,2).setValue("")
+  wipe.getRange(7,2).setValue("")
+  var cell = wipe.getRange('B2');
+   wipe.setCurrentCell(cell);
+      var pass = true
+    } if (totalclubs == 1 && choice2range.isBlank() == true && choice3range.isBlank() == true && choice4range.isBlank() == true){
+    var database = SpreadsheetApp.openById(getterlink)
+  SpreadsheetApp.setActiveSpreadsheet(database);
+  var database = SpreadsheetApp.setActiveSheet(database.getSheets()[0])
+  database.getRange(row,8,19).setValue("")
+  database.getRange(row,8).setValue(mobileno)
+  database.getRange(row, 9).setValue(choice1)
+  database.getRange(row, 10).setValue(choice2)
+  database.getRange(row, 11).setValue(choice3)
+  database.getRange(row, 12).setValue(choice4)
+  database.getRange(row, 13).setValue(choice1name)
+  database.getRange(row, 14).setValue(choice1category)
+  database.getRange(row, 15).setValue(choice1fee)
+  database.getRange(row, 16).setValue(choice2name)
+  database.getRange(row, 17).setValue(choice2category)
+  database.getRange(row, 18).setValue(choice2fee)
+  database.getRange(row, 19).setValue(choice3name)
+  database.getRange(row, 20).setValue(choice3category)
+  database.getRange(row, 21).setValue(choice3fee)  
+  database.getRange(row, 22).setValue(choice4name)
+  database.getRange(row, 23).setValue(choice4category)
+  database.getRange(row, 24).setValue(choice4fee)
+  database.getRange(row, 25).setValue(totalclubs)
+  database.getRange(row, 26).setValue(totalfee)
+  ui.alert('Data has been entered')
+  var ss = SpreadsheetApp.openById(setterlink)
+  SpreadsheetApp.setActiveSpreadsheet(ss)
+  var wipe = SpreadsheetApp.setActiveSheet(holder)
+  wipe.getRange(2,2).setValue("")
+  wipe.getRange(3,2).setValue("")
+  wipe.getRange(4,2).setValue("")
+  wipe.getRange(5,2).setValue("")
+  wipe.getRange(6,2).setValue("")
+  wipe.getRange(7,2).setValue("")
+  var cell = wipe.getRange('B2');
+   wipe.setCurrentCell(cell);
+      var pass = true
+    } if (totalclubs == 0){
+    var database = SpreadsheetApp.openById(getterlink)
+  SpreadsheetApp.setActiveSpreadsheet(database);
+  var database = SpreadsheetApp.setActiveSheet(database.getSheets()[0])
+  database.getRange(row,8,1,19).setValue("")
+  database.getRange(row,8).setValue(mobileno)
+  database.getRange(row, 9).setValue(choice1)
+  database.getRange(row, 10).setValue(choice2)
+  database.getRange(row, 11).setValue(choice3)
+  database.getRange(row, 12).setValue(choice4)
+  database.getRange(row, 13).setValue(choice1name)
+  database.getRange(row, 14).setValue(choice1category)
+  database.getRange(row, 15).setValue(choice1fee)
+  database.getRange(row, 16).setValue(choice2name)
+  database.getRange(row, 17).setValue(choice2category)
+  database.getRange(row, 18).setValue(choice2fee)
+  database.getRange(row, 19).setValue(choice3name)
+  database.getRange(row, 20).setValue(choice3category)
+  database.getRange(row, 21).setValue(choice3fee)  
+  database.getRange(row, 22).setValue(choice4name)
+  database.getRange(row, 23).setValue(choice4category)
+  database.getRange(row, 24).setValue(choice4fee)
+  database.getRange(row, 25).setValue(totalclubs)
+  database.getRange(row, 26).setValue(totalfee)
+  ui.alert('Data has been entered')
+  var ss = SpreadsheetApp.openById(setterlink)
+  SpreadsheetApp.setActiveSpreadsheet(ss)
+  var wipe = SpreadsheetApp.setActiveSheet(holder)
+  wipe.getRange(2,2).setValue("")
+  wipe.getRange(3,2).setValue("")
+  wipe.getRange(4,2).setValue("")
+  wipe.getRange(5,2).setValue("")
+  wipe.getRange(6,2).setValue("")
+  wipe.getRange(7,2).setValue("")
+  var cell = wipe.getRange('B2');
+   wipe.setCurrentCell(cell);
+      var pass = true
+    }
+   else if(pass== false){
+  var alert = ui.alert('Error! Input data in chronological order/Data Inputed not on club list.')
+  return
+  }
+  }
+else{
+  
+  var alert = ui.alert('Meet requirement to proceed. Error message: '.concat(status))
+  return
+ 
+  }
+}

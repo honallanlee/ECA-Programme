@@ -1,0 +1,129 @@
+function onOpenEmail() {
+  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
+      .createMenu('Checkout')
+      .addItem('Send E-mail', 'newEmail_AutomationHTML')
+      .addToUi();
+}
+function newEmail_AutomationHTML() {
+   var ss = SpreadsheetApp.getActiveSpreadsheet() //get spreadsheet link
+   var database = SpreadsheetApp.setActiveSheet(ss.getSheets()[0]) //define first sheet of spreadsheet as database
+   var startRow = 1 //startrow of data
+   var numRows = 1500 //number of data
+   var dataRange = database.getRange(startRow, 1, numRows, 26); //
+   var ui = SpreadsheetApp.getUi()
+  var result = ui.prompt(
+      'Email Automation',
+      'Please enter Student Reg No',
+      ui.ButtonSet.OK_CANCEL);
+
+  // Process the user's response.
+  var button = result.getSelectedButton();
+  var target = result.getResponseText();
+  var target = "s"+ target;
+  var targetstatus = false; 
+  Logger.log(target)
+  var tester = false;
+  var newname = "";
+  var lowerstring = "";
+  var greetingname = "";
+ 
+  var image2 = '<img src=" https://i.postimg.cc/d1hCxfsJ/Whats-App-Image-2019-09-15-at-1-18-11-PM.jpg">';
+  var image = '<img src="https://lh3.googleusercontent.com/TDlPJfdmzwrZw3FlrZPGzwACmFLmTo6dc-zTU_o13MZJP5xWHGETFGAb8_ExRNpL3ZlTdqHpdoset4CntEwOsJrReVU0cgPOt_otk6PFi2dwBrXTup_1bnDV4gwUyOmGTK2mkxOSGRwZiU2zoXVb_Txo2EtAiZRYMU73YUz5olAj3Ca6zz1tiAOaDGUVZzgdycVwd-GewoQlbOXHk5y7CT-30Sy3SF-CAPef5TUi508puA-ZC3fp2PTYlRZn2Ap9Vgt1PalAevMl5_yG3_URojmRUzxstPQd3br2897db7hPuFNCRjLMRoFJ6PUY_yK0t2KUHbQ16wzoG4SkmpPRq_hYkw2HRTg5e0-9xPLWox0nC9hwtAMgmdUMaNbKpBJSCbJufgy7GyVyrbaIboGTAAWA1dtv_kgKpfBMCp6JwSiPsOvYRmkhKmM1_rnPMQ-85_K7Bad9VkhVWaDdzW9cheiQ83kuW20MMe4PCsU_3LfNDrqaiWgKJoOeD-IdOndLNAdR52_5kP7eY3iaXeqtublWUeABcxsJgkOStKhmqVpBwr3uT6Y4TaKy1ag=w1440-h804">'
+  var FCchairmanname = "Ho Ryan";
+  var FCnumber = "+85292447771";
+  var CCBchairmanname = "Siu Chun Hei";
+  var CCBnumber = "+85290118240";
+  if (button == ui.Button.OK) {   
+  var data = dataRange.getValues()
+     for (var i=0; i<data.length; ++i){
+    var column = data[i]
+    var studentregno = column[0]
+    if (studentregno == target){
+    var name = column [2]
+    var separatename = name.split(" ");
+      Logger.log(separatename)
+      for (var n=0,len=separatename.length;n<len;n++){
+        lowerstring = separatename[n].toLowerCase();
+        Logger.log(lowerstring)
+        newname = lowerstring.charAt(0).toUpperCase() + lowerstring.slice(1)
+        var greetingname = greetingname + " " + newname
+          Logger.log(lowerstring);
+      }
+    Logger.log(newname);
+    Logger.log(greetingname)
+    var formclass = column [3]
+    var classno = column [4]
+    var mobileno = column[7]
+    var choice1name = column[12]
+    var choice1category = column[13]
+    var choice1fee = column[14]
+    var choice2name = column[15]
+    var choice2category = column[16]
+    var choice2fee = column[17]
+    var choice3name = column[18]
+    var choice3category = column[19]
+    var choice3fee = column[20]
+    var choice4name = column [21]
+    var choice4category=column[22]
+    var choice4fee = column[23]
+    var totalclubs = column[24]
+    var total = column[25]
+    var indent = "\n"
+    var emailAddress = column[6]
+    var greeting = "<p>Dear".concat(" ",greetingname,",</p>"); 
+    var contactinfo = "<p>Info:</p>".concat(" ",greetingname,"<p> Class: ",formclass,"(",classno,")</p>");
+    var message2 = "<p></p>"
+    var msgchoice1 ="<p>First Choice:".concat(" ",choice1name,"</p> ","<p>Category of"," ",choice1category,"</p>","<p>Fee: ","HKD$",choice1fee,"</p>");
+    var msgchoice2 ="<p>Second Choice:".concat(" ",choice2name,"</p> ","<p>Category of"," ",choice2category,"</p>","<p>Fee: ","HKD$",choice2fee,"</p>");
+    var msgchoice3 ="<p>Third Choice:".concat(" ",choice3name,"</p> ","<p>Category of"," ",choice3category,"</p>","<p>Fee: ","HKD$",choice3fee,"</p>");    
+    var msgchoice4 ="<p>Fourth Choice:".concat(" ",choice4name,"</p> ","<p>Category of"," ",choice4category,"</p>","<p>Fee: ","HKD$",choice4fee,"</p>");
+    var msgtotal = "<p>Overall Total: HKD$".concat(total,"</p>") ;
+    var feedback = "<p>Should you have any problems or would like to change your choice please contact "+FCchairmanname+" at "+FCnumber+",if you have enquiries on our club choices or system please feel free to contact "+CCBchairmanname+" at "+CCBnumber+"</p>"//enquiries message
+    var ending = "<p> Yours sincerely,</p>"+"<p> Data Management Team of Finance Committee</p>"
+    var credits = '<font size="0.1">A System Created by Allan Lee</font>'
+    var subject = "LSCSA1920 ECA Promotion Fair Cashier Reciept"; //set subject of email
+    var confirmation = ui.alert(
+     'Please confirm payment',
+     "Are you sure you want to continue?".concat(indent,greetingname,indent,studentregno,indent,choice1name,indent,choice2name,indent,choice3name,indent,choice4name,indent,"HKD$",total),
+      ui.ButtonSet.YES_NO);
+  // Process the user's response.
+  if (confirmation == ui.Button.YES) {
+  if (totalclubs == 4){
+    var message = image.concat(greeting,indent,contactinfo,message2,indent,msgchoice1,indent,msgchoice2,indent,msgchoice3,indent,msgchoice4,indent,msgtotal,indent,feedback,indent,ending,credits) //compose email content by concat function adding all strings into one       
+  }
+     else if (totalclubs == 3) {
+    var message = image.concat(greeting,indent,contactinfo,message2,indent,msgchoice1,indent,msgchoice2,indent,msgchoice3,indent,msgtotal,indent,feedback,indent,ending,credits) //compose email content by concat function adding all strings into one      
+    }
+    else if (totalclubs == 2) {
+    var message = image.concat(greeting,indent,contactinfo,message2,indent,msgchoice1,indent,msgchoice2,indent,msgtotal,indent,feedback,indent,ending,credits) //compose email content by concat function adding all strings into one   
+    }
+  else if (totalclubs == 1){
+    var message = image.concat(greeting,indent,contactinfo,message2,indent,msgchoice1,indent,msgtotal,indent,feedback,indent,ending,credits) //compose email content by concat function adding all strings into one   
+  }else if (totalclubs == 0){
+    var msg= "<p>You didnt apply for any clubs.</p>"
+    var msgtotal = "<p>Overall Total N.A.</p>" ;
+    var message = image.concat(greeting,message2,indent,contactinfo,indent,msg,indent,msgtotal,indent,feedback,indent,ending,credits) //compose email content by concat function adding all strings into one   
+    }
+     GmailApp.sendEmail(emailAddress, subject, message,{name: 'La Salle College Student Association',replyTo:'allan.lee18@imperial.ac.uk',htmlBody:message});
+      database.getRange(i+1, 27).setValue("EMAIL_SENT");
+      ui.alert("Notification","Email Sent",ui.ButtonSet.OK);
+      var selection = database.getRange(i+1,27)
+      var targetstatus = true
+   database.setCurrentCell(selection)
+   } else if(confirmation == ui.Button.NO|| confirmation == ui.Button.CLOSE){
+     ui.alert("Notification",'Payment cancelled. Programme terminated',ui.ButtonSet.OK)
+     targetstatus = true
+     }
+   
+    
+    } 
+     } if(targetstatus == false){
+      ui.alert("Error",'Student Not Found',ui.ButtonSet.OK);
+     }
+  } else if(button == ui.Button.CANCEL || button == ui.Button.CLOSE){
+    ui.alert("Notification",'You closed the programme',ui.ButtonSet.OK)
+  }
+
+}
+
+//A system created by Allan Lee//

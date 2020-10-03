@@ -1,0 +1,50 @@
+function autocategorize() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet()
+  var clubs = SpreadsheetApp.setActiveSheet(ss.getSheets()[1])
+  var database = SpreadsheetApp.setActiveSheet(ss.getSheets()[0])
+  var summary = SpreadsheetApp.setActiveSheet(ss.getSheets()[2])
+   Logger.log(database.getSheetId())
+  var noofclubsintotal = 55
+  var numberofrows= noofclubsintotal +3
+  var startRow = 1
+  var numRows= 1500
+  var identity = "Member"
+  var count = 2
+  var dataRange = database.getRange(startRow, 1, numRows, 13);
+  summary.getRange(1,1).setValue("Class")
+  summary.getRange(1,2).setValue("Class No")
+  summary.getRange(1,3).setValue("Student Reg No")
+  summary.getRange(1, 4).setValue("Eng Name")
+  summary.getRange(1,5).setValue("Club Name")
+  summary.getRange(1, 6).setValue("Club Position")
+  summary.getRange(1,7).setValue("Mobile Number")
+  var data = dataRange.getValues()
+  for (var n=3; n<numberofrows; ++n){
+    var target = clubs.getRange(n,1).getValues()
+    var targetname = clubs.getRange(n,2).getValues()
+  for (var i=0; i<data.length; ++i){
+    var column = data[i]
+    var studentregno = column[0]
+    var engname = column [2]
+    var formclass = column [3]
+    var classno = column [4]
+    var mobileno = column[7]
+    var choice1 = column[8]
+    var choice2 = column[9]
+    var choice3 = column[10]
+    var choice4 = column[11]
+    if (choice1 == target || choice2 == target || choice3 == target || choice4 == target){
+    summary.getRange(count, 1).setValue(formclass)
+    Logger.log(formclass)
+    summary.getRange(count, 2).setValue(classno)
+    summary.getRange(count, 3).setValue(studentregno)    
+    summary.getRange(count, 4).setValue(engname)
+    summary.getRange(count, 5).setValue(targetname)
+    summary.getRange(count, 6).setValue(identity)
+    summary.getRange(count, 7).setValue(mobileno)
+    count = count + 1
+
+}
+}
+}
+}
